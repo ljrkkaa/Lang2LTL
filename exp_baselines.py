@@ -14,7 +14,6 @@ from openai.embeddings_utils import cosine_similarity
 from gpt import GPT3
 from s2s_sup import Seq2Seq
 from s2s_hf_transformers import HF_MODELS
-from s2s_pt_transformer import construct_dataset_meta
 from dataset_lifted import load_split_dataset
 from utils import load_from_file, save_to_file, build_placeholder_map, substitute, substitute_single_letter
 from eval import evaluate_grounded_ltl, evaluate_lang2ltl, evaluate_lang_new, evaluate_plan
@@ -216,13 +215,6 @@ def translate_modular(grounded_utts, objs_per_utt):
         trans_module = GPT3(translation_engine)
     elif args.sym_trans in HF_MODELS:
         trans_module = Seq2Seq(args.sym_trans)
-    elif args.sym_trans == "pt_transformer":
-        train_iter, _, _, _ = load_split_dataset(args.s2s_sup_data)
-        vocab_transform, text_transform, src_vocab_size, tar_vocab_size = construct_dataset_meta(train_iter)
-        model_params = f"model/s2s_{args.sym_trans}.pth"
-        trans_module = Seq2Seq(args.sym_trans,
-                               vocab_transform=vocab_transform, text_transform=text_transform,
-                               src_vocab_sz=src_vocab_size, tar_vocab_sz=tar_vocab_size, fpath_load=model_params)
     else:
         raise ValueError(f"ERROR: translation module not recognized: {args.sym_trans}")
 
@@ -321,7 +313,7 @@ if __name__ == "__main__":
     parser.add_argument("--ground", type=str, default="gpt3", choices=["gpt3", "bert"], help="grounding module")
     parser.add_argument("--embed_engine", type=str, default="text-embedding-ada-002", help="gpt-3 embedding engine")
     parser.add_argument("--topk", type=int, default=2, help="top k similar known names to re")
-    parser.add_argument("--sym_trans", type=str, default="gpt3_finetuned", choices=["gpt3_finetuned", "gpt3_pretrained", "t5-base", "t5-small", "pt_transformer"], help="symbolic translation module")
+    parser.add_argument("--sym_trans", type=str, default="gpt3_finetuned", choices=["gpt3_finetuned", "gpt3_pretrained", "t5-base", "t5-small"], help="symbolic translation module")
     parser.add_argument("--convert_rule", type=str, default="lang2ltl", choices=["lang2ltl", "cleanup"], help="name to prop conversion rule.")
     parser.add_argument("--full_e2e", action="store_true", help="solve translation and ground end-to-end using GPT-3")
     parser.add_argument("--full_e2e_prompt", type=str, default="data/cleanup_full_e2e_prompt_15.txt", help="path to full end-to-end prompt")

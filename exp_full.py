@@ -62,11 +62,6 @@ def run_exp():
         if args.sym_trans in HF_MODELS:
             checkpoint = load_from_file(args.model2ckpt_fpath)[args.sym_trans]
             translation_engine = os.path.join(args.model_dpath, args.sym_trans, f"checkpoint-{checkpoint}")
-        elif args.sym_trans == "gpt3_finetuned":
-            translation_engine = f"gpt3_finetuned_{Path(data_fpath).stem}"
-            translation_engine = load_from_file("model/gpt3_models.pkl")[translation_engine]
-        elif args.sym_trans == "gpt3_pretrained":
-            translation_engine = "text-davinci-003"
         else:
             raise ValueError(f"ERROR: unrecognized symbolic translation model: {args.sym_trans}")
 
@@ -184,7 +179,7 @@ if __name__ == "__main__":
     parser.add_argument("--ground", type=str, default="gpt3", choices=["gpt3"], help="grounding module.")
     parser.add_argument("--embed_engine", type=str, default="text-embedding-ada-002", help="gpt-3 embedding engine.")
     parser.add_argument("--topk", type=int, default=2, help="top k similar known obj names to re.")
-    parser.add_argument("--sym_trans", type=str, default="t5-base", choices=["t5-base", "gpt3_finetuned", "gpt3_pretrained"], help="symbolic translation module.")
+    parser.add_argument("--sym_trans", type=str, default="t5-base", choices=["t5-base", "gpt3_pretrained"], help="symbolic translation module.")
     parser.add_argument("--model_dpath", type=str, default=None, help="directory to model checkpoints.")
     parser.add_argument("--model2ckpt_fpath", type=str, default=None, help="best checkpoint for models.")
     parser.add_argument("--convert_rule", type=str, default="lang2ltl", choices=["lang2ltl", "cleanup"], help="re to prop conversion rule.")

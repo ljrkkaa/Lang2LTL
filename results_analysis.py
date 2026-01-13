@@ -11,9 +11,9 @@ import numpy as np
 
 
 #PARSE_FUNCS = {'utt_holdout': parse_results_utt, 'formula_holdout': parse_results_formula, 'type_holdout': parse_results_type}
-SYMBOLIC_MODEL_TYPES = ['finetuned_gpt3', 'pretrained_gpt3','s2s_pt_transformer']
+SYMBOLIC_MODEL_TYPES = ['finetuned_gpt3', 'pretrained_gpt3']
 SYMBOLIC_TEST_TYPES = ['utt_holdout','formula_holdout','type_holdout']
-MODEL_NAMES = {'finetuned_gpt3': 'Finetuned GPT3', 'pretrained_gpt3': 'Prompt GPT3', 's2s_pt_transformer': 'Seq2Seq'}
+MODEL_NAMES = {'finetuned_gpt3': 'Finetuned GPT3', 'pretrained_gpt3': 'Prompt GPT3'}
 TEST_NAMES = {'utt_holdout': 'Utterance','formula_holdout':'Formula','type_holdout':'Type'}
 
 OSM_MODEL_NAMES = ['Lang2LTL', 'CopyNet']

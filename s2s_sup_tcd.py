@@ -10,15 +10,11 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 from formula_sampler import PROPS
 from s2s_hf_transformers import T5_PREFIX, HF_MODELS
-from s2s_pt_transformer import Seq2SeqTransformer, \
-    NUM_ENCODER_LAYERS, NUM_DECODER_LAYERS, EMBED_SIZE, NHEAD, DIM_FFN_HID
-from s2s_pt_transformer import translate as pt_transformer_translate
-from s2s_pt_transformer import construct_dataset_meta as pt_transformer_construct_dataset_meta
 from dataset_lifted import load_split_dataset
 from eval import evaluate_sym_trans
 from utils import count_params
 
-S2S_MODELS = HF_MODELS.extend(["pt_transformer"])
+S2S_MODELS = HF_MODELS
 UNARY_OPERATORS = ['!', "F", "G", "X"]
 BINARY_OPERATORS = ['&', '|', 'U', 'i', 'e', 'M']
 END_TOKEN = '</s>'
@@ -98,20 +94,12 @@ class Seq2Seq:
         if "t5" in model_name or "bart" in model_name:
             self.tokenizer = AutoTokenizer.from_pretrained(model_dpath)
             self.model = AutoModelForSeq2SeqLM.from_pretrained(model_dpath).to(self.device)
-        elif model_name == "pt_transformer":
-            self.model = Seq2SeqTransformer(kwargs["src_vocab_sz"], kwargs["tar_vocab_sz"],
-                                            NUM_ENCODER_LAYERS, NUM_DECODER_LAYERS, EMBED_SIZE, NHEAD,
-                                            DIM_FFN_HID)
-            self.model_translate = pt_transformer_translate
-            self.vocab_transform = vocab_transform
-            self.text_transform = text_transform
-            self.model.load_state_dict(torch.load(kwargs["fpath_load"]))
         else:
             raise ValueError(f'ERROR: unrecognized model: {model_name}')
 
     def translate(self, queries):
         if "t5" in self.model_name or "bart" in self.model_name:
-            inputs = [f"{T5_PREFIX}{query}" for query in queries]  # add prefix
+            inputs = [f"{T5_PREFIX}{utt}" for utt in utts]  # add prefix
 
             inputs = self.tokenizer(inputs, return_tensors="pt", padding=True).to(self.device)
             output_tokens = self.model.generate(
@@ -121,11 +109,10 @@ class Seq2Seq:
                 max_new_tokens=256,
             )
             ltls = self.tokenizer.batch_decode(output_tokens, skip_special_tokens=True)
-        elif self.model_name == "pt_transformer":
-            ltls = [self.model_translate(self.model, self.vocab_transform, self.text_transform, queries[0])]
         else:
             raise ValueError(f'ERROR: unrecognized model, {self.model_name}')
         return ltls
+
 
     def type_constrained_decode(self, utts):
         """
@@ -284,12 +271,6 @@ if __name__ == "__main__":
             model_dpath = os.path.join(args.model_dpath, args.model, ckpt_dname)
             logging.info(f"Load model and checkpoint: {model_dpath}")
             s2s = Seq2Seq(model_dpath, args.model)
-        elif args.model == "pt_transformer":  # pretrained seq2seq transformer implemented in PyTorch
-            vocab_transform, text_transform, src_vocab_size, tar_vocab_size = pt_transformer_construct_dataset_meta(train_iter)
-            model_params = f"model/s2s_{args.model}_{Path(data_fpath).stem}.pth"
-            s2s = Seq2Seq(args.model_dpath, args.model,
-                          vocab_transform=vocab_transform, text_transform=text_transform,
-                          src_vocab_sz=src_vocab_size, tar_vocab_sz=tar_vocab_size, fpath_load=model_params)
         else:
             raise TypeError(f"ERROR: unrecognized model, {args.model}")
         logging.info(f"Number of trainable parameters in {args.model}: {count_params(s2s)}")
