@@ -21,9 +21,6 @@ def lang2ltl(utt, obj2sem, keep_keys,
     if sym_trans_model in HF_MODELS:
         model_fpath = os.path.join(model_dpath, "t5-base", "checkpoint-best")
         translation_engine = model_fpath
-    elif sym_trans_model == "gpt3_finetuned":
-        translation_engine = f"gpt3_finetuned_symbolic_batch12_perm_utt_0.2_42"
-        translation_engine = load_from_file(os.path.join(model_dpath, "gpt3_models.pkl"))[translation_engine]
     else:
         raise ValueError(f"ERROR: unrecognized symbolic translation model: {sym_trans_model}")
 
@@ -148,7 +145,7 @@ def translate_grounded_utts(ground_utts, objs_per_utt, sym_trans_model, translat
     Translation language to LTL modular approach.
     :param ground_utts: Input utterances with name entities grounded to objects in given environment.
     :param objs_per_utt: grounding objects for each input utterance.
-    :param sym_trans_model: symbolic translation model, gpt3_finetuned, gpt3_pretrained, t5-base.
+    :param sym_trans_model: symbolic translation model, gpt3_pretrained, t5-base.
     :param translation_engine: pretrained T5 model weights, finetuned or pretrained GPT-3 engine to use for translation.
     :param convert_rule: referring expression to proposition conversion rule.
     :param props: all possible propositions.

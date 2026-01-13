@@ -313,7 +313,7 @@ if __name__ == "__main__":
     parser.add_argument("--ground", type=str, default="gpt3", choices=["gpt3", "bert"], help="grounding module")
     parser.add_argument("--embed_engine", type=str, default="text-embedding-ada-002", help="gpt-3 embedding engine")
     parser.add_argument("--topk", type=int, default=2, help="top k similar known names to re")
-    parser.add_argument("--sym_trans", type=str, default="gpt3_finetuned", choices=["gpt3_finetuned", "gpt3_pretrained", "t5-base", "t5-small"], help="symbolic translation module")
+    parser.add_argument("--sym_trans", type=str, default="gpt3_pretrained", choices=["gpt3_pretrained", "t5-base", "t5-small"], help="symbolic translation module")
     parser.add_argument("--convert_rule", type=str, default="lang2ltl", choices=["lang2ltl", "cleanup"], help="name to prop conversion rule.")
     parser.add_argument("--full_e2e", action="store_true", help="solve translation and ground end-to-end using GPT-3")
     parser.add_argument("--full_e2e_prompt", type=str, default="data/cleanup_full_e2e_prompt_15.txt", help="path to full end-to-end prompt")
@@ -411,10 +411,7 @@ if __name__ == "__main__":
                     logging.info(f"RER engine: {args.rer_engine}")
                     logging.info(f"Embedding engine: {args.embed_engine}")
 
-                    if args.sym_trans == "gpt3_finetuned":
-                        translation_engine = f"gpt3_finetuned_{Path(data_fpath).stem}"
-                        translation_engine = load_from_file("model/gpt3_models.pkl")[translation_engine]
-                    elif args.sym_trans == "gpt3_pretrained":
+                    if args.sym_trans == "gpt3_pretrained":
                         translation_engine = "text-davinci-003"
                     else:
                         raise ValueError(f"ERROR: unrecognized symbolic translation model: {args.sym_trans}")
@@ -459,10 +456,7 @@ if __name__ == "__main__":
         logging.info(f"RER engine: {args.rer_engine}")
         logging.info(f"Embedding engine: {args.embed_engine}")
 
-        if args.sym_trans == "gpt3_finetuned":
-            translation_engine = f"gpt3_finetuned_symbolic_batch12_perm_utt_0.2_2"
-            translation_engine = load_from_file("model/gpt3_models.pkl")[translation_engine]
-        elif args.sym_trans == "gpt3_pretrained":
+        if args.sym_trans == "gpt3_pretrained":
             translation_engine = "text-davinci-003"
         else:
             raise ValueError(f"ERROR: unrecognized symbolic translation model: {args.sym_trans}")
@@ -494,10 +488,7 @@ if __name__ == "__main__":
         logging.info(f"RER engine: {args.rer_engine}")
         logging.info(f"Embedding engine: {args.embed_engine}")
 
-        if args.sym_trans == "gpt3_finetuned":
-            translation_engine = f"gpt3_finetuned_symbolic_batch12_perm_utt_0.2_2"
-            translation_engine = load_from_file("model/gpt3_models.pkl")[translation_engine]
-        elif args.sym_trans == "gpt3_pretrained":
+        if args.sym_trans == "gpt3_pretrained":
             translation_engine = "text-davinci-003"
         else:
             raise ValueError(f"ERROR: unrecognized symbolic translation model: {args.sym_trans}")

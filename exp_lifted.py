@@ -19,7 +19,7 @@ if __name__ == "__main__":
     parser.add_argument("--train_dataset_fpath", type=str, default="data/holdout_split_batch12_perm/symbolic_batch12_perm_ltl_type_3_42_fold4.pkl", help="path to pkl file storing train set")
     parser.add_argument("--test_dataset_fpath", type=str, default="data/holdout_split_batch12_perm/symbolic_batch12_perm_ltl_type_3_42_fold4.pkl", help="path to pkl file storing test set")
     parser.add_argument("--analysis_fpath", type=str, default="data/analysis_symbolic_batch12_perm.csv", help="path to dataset analysis")
-    parser.add_argument("--model", type=str, default="gpt-4", choices=["gpt3_finetuned_symbolic_batch12_perm_utt_0.2_111", "gpt-4", "text-davinci-003"], help="name of model to be evaluated")
+    parser.add_argument("--model", type=str, default="gpt-4", choices=["gpt-4", "text-davinci-003"], help="name of model to be evaluated")
     parser.add_argument("--nexamples", type=int, default=3, help="number of examples per instance in prompt for GPT")
     parser.add_argument("--rand_eval_samples", type=int, default=100, help="number of random evaluation samples per formula")
     parser.add_argument("--seed_eval_samples", type=int, default=42, help="seed for randomly sampling evaluation samples")
@@ -48,14 +48,7 @@ if __name__ == "__main__":
                 dname = f"formula_holdout_batch12_perm"
             elif "type" in args.train_dataset_fpath:
                 dname = f"type_holdout_batch12_perm"
-            if "finetuned" in args.model:
-                engine = load_from_file("model/gpt3_models.pkl")[args.model]
-                valid_iter = [(f"Utterance: {utt}\nLTL:", ltl) for utt, ltl in valid_iter]
-                result_dpath = os.path.join("results", "finetuned_gpt3", dname)
-                os.makedirs(result_dpath, exist_ok=True)
-                result_log_fpath = os.path.join(result_dpath, f"log_{args.model}.csv")  # fintuned model name already contains dataset name
-                acc_fpath = os.path.join(result_dpath, f"acc_{args.model}.csv")
-            else:
+            if "davinci" in args.model or "gpt" in args.model:  # text-davinci-003 for off-the-shelf gpt-3, gpt-4 for off-the-shelf gpt-4
                 engine = args.model
                 prompt_fname = f"prompt_nexamples{args.nexamples}_{dataset_name}.txt"  # prompt corresponds to train split dataset
                 prompt_fpath = os.path.join("data", "prompt_symbolic_batch12_perm", prompt_fname)
@@ -65,6 +58,8 @@ if __name__ == "__main__":
                 os.makedirs(result_dpath, exist_ok=True)
                 result_log_fpath = os.path.join(result_dpath, f"log_{args.model}_{Path(prompt_fname).stem}_{args.rand_eval_samples}-eval-samples.csv")
                 acc_fpath = os.path.join(result_dpath, f"acc_{args.model}_{Path(prompt_fname).stem}_{args.rand_eval_samples}-eval-samples.csv")
+            else:
+                raise ValueError(f"ERROR: unrecognized model: {args.model}")
             dataset["valid_iter"] = valid_iter
 
             # Samples a subset of test set by sampling rand_eval_samples per formula

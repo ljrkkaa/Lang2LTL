@@ -263,7 +263,7 @@ if __name__ == "__main__":
     parser.add_argument("--train_dataset_fpath", type=str, default="data/holdout_split_batch12_perm/symbolic_batch12_perm_utt_0.2_111.pkl", help="path to pkl file storing train set")
     parser.add_argument("--test_dataset_fpath", type=str, default="data/holdout_split_batch12_perm/symbolic_batch12_perm_utt_0.2_111.pkl", help="path to pkl file storing test set")
     parser.add_argument("--analysis_fpath", type=str, default="data/analysis_symbolic_batch12_perm.csv", help="path to dataset analysis")
-    parser.add_argument("--model", type=str, default="gpt3_finetuned_symbolic_batch12_perm_utt_0.2_111", help="name of model to be evaluated")
+    parser.add_argument("--model", type=str, default="gpt-4", help="name of model to be evaluated")
     parser.add_argument("--nexamples", type=int, default=1, help="number of examples per instance for GPT-3")
     parser.add_argument("--aggregate", action="store_true", help="whether to aggregate results or compute new results.")
     args = parser.parse_args()
@@ -288,14 +288,7 @@ if __name__ == "__main__":
                 dname = "formula_holdout_batch12_perm"
             elif "type" in args.train_dataset_fpath:
                 dname = "type_holdout_batch12_perm"
-            if "finetuned" in args.model:
-                engine = load_from_file("model/gpt3_models.pkl")[args.model]
-                valid_iter = [(f"Utterance: {utt}\nLTL:", ltl) for utt, ltl in valid_iter]
-                result_dpath = os.path.join("results", "finetuned_gpt3", dname)
-                os.makedirs(result_dpath, exist_ok=True)
-                result_log_fpath = os.path.join(result_dpath, f"log_{args.model}.csv")  # fintuned model name already contains dataset name
-                acc_fpath = os.path.join(result_dpath, f"acc_{args.model}.csv")
-            else:
+            if "davinci" in args.model:
                 engine = args.model
                 prompt_fpath = os.path.join("data", "prompt_nl2ltl", f"nl2ltl_prompt_nexamples{args.nexamples}_{dataset_name}.txt")
                 prompt = load_from_file(prompt_fpath)
@@ -304,6 +297,8 @@ if __name__ == "__main__":
                 os.makedirs(result_dpath, exist_ok=True)
                 result_log_fpath = os.path.join(result_dpath, f"log_{args.model}_{dataset_name}.csv")
                 acc_fpath = os.path.join(result_dpath, f"acc_{args.model}_{dataset_name}.csv")
+            else:
+                raise ValueError(f"ERROR: unrecognized model: {args.model}")
             dataset["valid_iter"] = valid_iter
             split_dataset_fpath = os.path.join("data", "gpt3", f"{dataset_name}.pkl")
             save_to_file(dataset, split_dataset_fpath)
