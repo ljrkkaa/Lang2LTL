@@ -40,7 +40,8 @@ def finetune_t5(model_name, data_fpath, end_idx, model_dpath=None, valid_size=0.
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
 
-    print(f"====== right after load. model on cuda: {next(model.parameters()).device}")
+    # REFACTOR: Removed manual device print; Trainer/Accelerate handles device placement.
+    # Use trainer.args.device after Trainer initialization for device info.
 
     def preprocess_data(examples):
         inputs = [T5_PREFIX + utt for utt in examples["utt"]]
@@ -50,12 +51,13 @@ def finetune_t5(model_name, data_fpath, end_idx, model_dpath=None, valid_size=0.
             truncation=True,
         )
 
-        with tokenizer.as_target_tokenizer():
-            labels = tokenizer(
-                examples["ltl"],
-                max_length=MAX_TAR_LEN,
-                truncation=True,
-            )
+        # REFACTOR: Replaced deprecated `as_target_tokenizer()` context manager
+        # with `text_target=` argument. Required for Transformers >= 4.30.
+        labels = tokenizer(
+            text_target=examples["ltl"],
+            max_length=MAX_TAR_LEN,
+            truncation=True,
+        )
         model_inputs["labels"] = labels["input_ids"]
 
         return model_inputs
@@ -83,7 +85,7 @@ def finetune_t5(model_name, data_fpath, end_idx, model_dpath=None, valid_size=0.
         per_device_eval_batch_size=BATCH_SIZE,
         learning_rate=1e-5,
         weight_decay=0.01,
-        # fp16=True,
+        # fp16=True,  # Enable for mixed precision training on GPU
         evaluation_strategy="steps",
         eval_steps=1000,
         logging_strategy="steps",
@@ -94,7 +96,9 @@ def finetune_t5(model_name, data_fpath, end_idx, model_dpath=None, valid_size=0.
         load_best_model_at_end=True,
         save_total_limit=3,  # best and last chkpt always saved
         predict_with_generate=True,
-        report_to="tensorboard"
+        report_to="tensorboard",
+        # Multi-GPU settings: ddp_find_unused_parameters needed for some model architectures
+        ddp_find_unused_parameters=False,
     )
 
     data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
@@ -139,6 +143,7 @@ def construct_dataset(fpath, end_idx):
 
 
 def finetune_t5_old(input_sequences, output_sequences, tokenizer, model):
+    """Legacy fine-tuning function using manual training loop."""
     source_encoding = tokenizer(
         input_sequences,
         padding="longest",
@@ -148,6 +153,7 @@ def finetune_t5_old(input_sequences, output_sequences, tokenizer, model):
     )
     input_ids, attention_mask = source_encoding.input_ids, source_encoding.attention_mask
 
+    # Uses text_target= for modern Transformers compatibility
     target_encoding = tokenizer(
         text_target=output_sequences,
         padding="longest",
