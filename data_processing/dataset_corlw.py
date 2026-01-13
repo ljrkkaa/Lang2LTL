@@ -4,7 +4,7 @@ Generate utterance-language dataset for CleanUp and OSM for CoRL23-W.
 import random
 import spot
 
-from utils import load_from_file, save_to_file, substitute
+from tools.utils import load_from_file, save_to_file, substitute
 
 
 def generate_tar_file():

@@ -9,14 +9,14 @@ import random
 import numpy as np
 import spot
 
-from lang2ltl import rer, ground_res, ground_utterances, translate_grounded_utts
-from formula_sampler import ALL_PROPS
-from gpt import GPT3, GPT4
-from s2s_hf_transformers import HF_MODELS
-from utils import load_from_file, save_to_file, substitute_single_letter
-from eval import evaluate_grounded_ltl, evaluate_lang2ltl, evaluate_plan
-from formula_sampler import TYPE2NPROPS
-from analyze_results import find_all_formulas
+from core.lang2ltl import rer, ground_res, ground_utterances, translate_grounded_utts
+from core.formula_sampler import ALL_PROPS
+from models.gpt import GPT3, GPT4
+from models.s2s_hf_transformers import HF_MODELS
+from tools.utils import load_from_file, save_to_file, substitute_single_letter
+from core.eval import evaluate_grounded_ltl, evaluate_lang2ltl, evaluate_plan
+from core.formula_sampler import TYPE2NPROPS
+from analysis.analyze_results import find_all_formulas
 
 
 def run_exp():

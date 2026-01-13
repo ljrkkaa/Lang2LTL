@@ -3,7 +3,7 @@ from datetime import datetime
 import logging
 import yaml
 
-from lang2ltl import SHARED_DPATH, lang2ltl
+from core.lang2ltl import SHARED_DPATH, lang2ltl
 
 
 if __name__ == "__main__":

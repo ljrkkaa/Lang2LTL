@@ -11,7 +11,7 @@
 # Prerequisites:
 #   - accelerate >= 0.20.1 installed
 #   - CUDA available on GPUs 0 and 1
-
+export PYTHONPATH=$(pwd):$PYTHONPATH
 set -e
 
 # Get script directory for relative paths
@@ -43,7 +43,7 @@ if [ -f "accelerate_config.yaml" ]; then
     echo "Using accelerate_config.yaml"
     accelerate launch \
         --config_file accelerate_config.yaml \
-        s2s_hf_transformers.py \
+        models/s2s_hf_transformers.py \
         --data_fpath "$DATA_FPATH" \
         --model "$MODEL" \
         --model_dpath "$MODEL_DPATH"
@@ -53,7 +53,7 @@ else
     accelerate launch \
         --num_processes=2 \
         --mixed_precision=no \
-        s2s_hf_transformers.py \
+        models/s2s_hf_transformers.py \
         --data_fpath "$DATA_FPATH" \
         --model "$MODEL" \
         --model_dpath "$MODEL_DPATH"

@@ -1,6 +1,6 @@
 import argparse
 from dataset_lifted import load_split_dataset
-from utils import save_to_file
+from tools.utils import save_to_file
 
 ONE_ARG_SYMBOLS = ['!', 'F', 'G', 'X']
 TWO_ARG_SYMBOLS = ['&', '|', 'U', 'M', 'i', 'e']

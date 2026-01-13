@@ -11,14 +11,14 @@ import numpy as np
 import spot
 from openai.embeddings_utils import cosine_similarity
 
-from gpt import GPT3
-from s2s_sup import Seq2Seq
-from s2s_hf_transformers import HF_MODELS
-from dataset_lifted import load_split_dataset
-from utils import load_from_file, save_to_file, build_placeholder_map, substitute, substitute_single_letter
-from eval import evaluate_grounded_ltl, evaluate_lang2ltl, evaluate_lang_new, evaluate_plan
-from formula_sampler import TYPE2NPROPS
-from analyze_results import find_all_formulas
+from models.gpt import GPT3
+from models.s2s_sup import Seq2Seq
+from models.s2s_hf_transformers import HF_MODELS
+from data_processing.dataset_lifted import load_split_dataset
+from tools.utils import load_from_file, save_to_file, build_placeholder_map, substitute, substitute_single_letter
+from core.eval import evaluate_grounded_ltl, evaluate_lang2ltl, evaluate_lang_new, evaluate_plan
+from core.formula_sampler import TYPE2NPROPS
+from analysis.analyze_results import find_all_formulas
 
 PROPS = ["a", "b", "c", "d", "h", "j", "k", "l", "n", "o", "p", "q", "r", "s", "y", "z"]
 

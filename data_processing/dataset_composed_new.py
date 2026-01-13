@@ -10,8 +10,8 @@ import random
 from collections import defaultdict
 from sklearn.model_selection import train_test_split
 
-from compose import COMPOSE_OPERATORS, compose_and, compose_or
-from utils import load_from_file, save_to_file, deserialize_props_str
+from tools.compose import COMPOSE_OPERATORS, compose_and, compose_or
+from tools.utils import load_from_file, save_to_file, deserialize_props_str
 
 
 def load_base_dataset(base_fpath, logger):

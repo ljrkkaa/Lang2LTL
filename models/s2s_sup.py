@@ -8,10 +8,10 @@ from pathlib import Path
 import torch
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-from s2s_hf_transformers import T5_PREFIX, HF_MODELS
-from dataset_lifted import load_split_dataset
-from eval import evaluate_sym_trans
-from utils import count_params
+from models.s2s_hf_transformers import T5_PREFIX, HF_MODELS
+from data_processing.dataset_lifted import load_split_dataset
+from core.eval import evaluate_sym_trans
+from tools.utils import count_params
 
 S2S_MODELS = HF_MODELS
 

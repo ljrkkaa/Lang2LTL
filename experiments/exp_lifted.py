@@ -9,9 +9,9 @@ from pprint import pprint
 import random
 from collections import defaultdict
 
-from gpt import GPT3, GPT4
-from eval import aggregate_results, evaluate_sym_trans
-from utils import load_from_file, save_to_file
+from models.gpt import GPT3, GPT4
+from core.eval import aggregate_results, evaluate_sym_trans
+from tools.utils import load_from_file, save_to_file
 
 
 if __name__ == "__main__":

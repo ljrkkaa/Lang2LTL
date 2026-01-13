@@ -102,11 +102,12 @@ Adhere strictly to the existing style found in core files like `utils.py` and `l
     import os
     import json
     import random
-    
+
     import numpy as np
     import nltk
-    
-    from utils import load_from_file
+
+    from tools.utils import load_from_file
+    from core.lang2ltl import lang2ltl
     ```
 *   Avoid `from module import *`.
 
@@ -119,13 +120,32 @@ Adhere strictly to the existing style found in core files like `utils.py` and `l
 
 ## 4. Project Structure & Key Files
 
+The codebase is organized into the following modules:
+
+### Core (`core/`)
 *   **`lang2ltl.py`**: Core logic for the Lang2LTL system.
-*   **`utils.py`**: Utility functions for string manipulation, file I/O, and data processing. Crucial for helper functions.
-*   **`tester.py`**: Main unit test file.
-*   **`exp_full.py`**: Main entry point for running experiments.
-*   **`gpt.py`**: Wrapper/Interface for OpenAI GPT models.
+*   **`formula_sampler.py`**: Sample LTL formulas given formula types and proposition counts.
+*   **`eval.py`**: Evaluation functions for translation and planning.
+
+### Data Processing (`data_processing/`)
 *   **`dataset_*.py`**: Various scripts for generating and manipulating datasets (lifted, grounded, etc.).
-*   **`s2s_hf_transformers.py`**: Script for fine-tuning HuggingFace models (T5, etc.).
+
+### Models (`models/`)
+*   **`gpt.py`**: Wrapper/Interface for OpenAI GPT models.
+*   **`get_embed.py`**: Interface for GPT-3 embeddings.
+*   **`s2s_*.py`**: Sequence-to-sequence model implementations.
+
+### Experiments (`experiments/`)
+*   **`exp_*.py`**: Experiment scripts for different evaluation scenarios.
+
+### Tools (`tools/`)
+*   **`utils.py`**: Utility functions for string manipulation, file I/O, and data processing. Crucial for helper functions.
+
+### Analysis (`analysis/`)
+*   **`analyze_results.py`**: Result analysis scripts.
+
+### Tests (`tests/`)
+*   **`tester.py`**: Main unit test file.
 
 ## 5. Running Experiments & Common Tasks
 

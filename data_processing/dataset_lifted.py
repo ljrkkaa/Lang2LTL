@@ -10,8 +10,8 @@ import string
 from collections import defaultdict
 from sklearn.model_selection import train_test_split, KFold
 
-from utils import load_from_file, save_to_file, append_ids_to_path, remove_id_from_path, deserialize_props_str, substitute_single_letter
-from formula_sampler import PROPS, FEASIBLE_TYPES, FILTER_TYPES, sample_formulas
+from tools.utils import load_from_file, save_to_file, append_ids_to_path, remove_id_from_path, deserialize_props_str, substitute_single_letter
+from core.formula_sampler import PROPS, FEASIBLE_TYPES, FILTER_TYPES, sample_formulas
 
 
 def merge_batches(batch_fpaths):

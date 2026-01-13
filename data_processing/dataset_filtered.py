@@ -2,7 +2,7 @@ import os
 import re
 from pprint import pprint
 
-from utils import load_from_file, save_to_file, name_to_prop
+from tools.utils import load_from_file, save_to_file, name_to_prop
 
 
 def filter_cleanup(env):

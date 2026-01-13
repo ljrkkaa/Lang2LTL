@@ -9,8 +9,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pprint import pprint
 
-from utils import load_from_file, save_to_file, deserialize_props_str
-from formula_sampler import TYPE2NPROPS, sample_formulas
+from tools.utils import load_from_file, save_to_file, deserialize_props_str
+from core.formula_sampler import TYPE2NPROPS, sample_formulas
 
 
 def plot_cm(results_fpath, cm, all_types):

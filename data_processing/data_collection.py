@@ -2,7 +2,7 @@ import argparse
 import os
 from collections import defaultdict
 
-from utils import load_from_file, save_to_file
+from tools.utils import load_from_file, save_to_file
 
 
 def aggregate_responses(raw_fpath, result_fpath):

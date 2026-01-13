@@ -8,11 +8,11 @@ from pathlib import Path
 import torch
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-from formula_sampler import PROPS
-from s2s_hf_transformers import T5_PREFIX, HF_MODELS
-from dataset_lifted import load_split_dataset
-from eval import evaluate_sym_trans
-from utils import count_params
+from core.formula_sampler import PROPS
+from models.s2s_hf_transformers import T5_PREFIX, HF_MODELS
+from data_processing.dataset_lifted import load_split_dataset
+from core.eval import evaluate_sym_trans
+from tools.utils import count_params
 
 S2S_MODELS = HF_MODELS
 UNARY_OPERATORS = ['!', "F", "G", "X"]
@@ -99,7 +99,7 @@ class Seq2Seq:
 
     def translate(self, queries):
         if "t5" in self.model_name or "bart" in self.model_name:
-            inputs = [f"{T5_PREFIX}{utt}" for utt in utts]  # add prefix
+            inputs = [f"{T5_PREFIX}{utt}" for utt in queries]  # add prefix
 
             inputs = self.tokenizer(inputs, return_tensors="pt", padding=True).to(self.device)
             output_tokens = self.model.generate(

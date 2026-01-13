@@ -10,7 +10,7 @@ import random
 import nltk
 import tiktoken
 
-from gpt import GPT3
+from models.gpt import GPT3
 
 
 def build_placeholder_map(name_entities, convert_rule, props):

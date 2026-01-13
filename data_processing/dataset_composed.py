@@ -2,8 +2,8 @@ import os
 from pathlib import Path
 import argparse
 
-from utils import load_from_file, save_to_file
-from dataset_symbolic import save_split_dataset_new
+from tools.utils import load_from_file, save_to_file
+from .dataset_symbolic import save_split_dataset_new
 
 
 def construct_composed_dataset(data_fpath, composed_fpath):

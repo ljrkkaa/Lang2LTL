@@ -38,38 +38,44 @@ After downloading the model weights, convert and load them using HuggingFace's m
 
 
 
-# Files
-```lang2ltl.py```: modules and API of the Lang2LTL language grounding system.
+# Project Structure
 
-```formula_sampler.py```: sample lifted LTL formulas given a formula type and the number of propositions.
+The codebase is organized into the following modules:
 
-```s2s_sup.py```: generic supervised sequence-to-sequence model.
+## Core Modules (`core/`)
+- `lang2ltl.py`: modules and API of the Lang2LTL language grounding system.
+- `formula_sampler.py`: sample lifted LTL formulas given a formula type and the number of propositions.
+- `eval.py`: functions to evaluate translation and planning.
 
-```s2s_hf_transformers.py```: finetune pretrained transformer models from HuggingFace.
+## Data Processing (`data_processing/`)
+- `dataset_lifted.py`: construct lifted train and test sets for evaluating the lifted translation module.
+- `dataset_grounded.py`: construct grounded train and test sets using OSM or CleanUp landmarks for evaluation full translation system.
+- `dataset_filtered.py`: import test sets from Gopalan et al. 18 and Berg et al. 20.
+- `dataset_composed.py`, `dataset_composed_new.py`, `dataset_corlw.py`, `dataset_mlm.py`: various dataset processing scripts.
+- `data_collection.py`: clean the collected lifted dataset of utterances, LTL formulas.
 
-```s2s_pt_transformer.py```: train from scratch transformer encoder-to-decoder model implemented in PyTorch.
+## Models (`models/`)
+- `gpt.py`: interface to GPT-3 and 4 model.
+- `get_embed.py`: interface to GPT-3 embedding.
+- `s2s_hf_transformers.py`: finetune pretrained transformer models from HuggingFace.
+- `s2s_pt_transformer.py`: train from scratch transformer encoder-to-decoder model implemented in PyTorch.
+- `s2s_sup_tcd.py`: supervised sequence-to-sequence model for TCD tasks.
+- `llama_example.py`: LLaMA model usage example.
 
-```gpt.py```: interface to GPT-3 and 4 model.
+## Experiments (`experiments/`)
+- `exp_full.py`: main function to start running all experiments for evaluating the full language grounding system.
+- `exp_lifted.py`, `exp_nl2ltl.py`, `exp_robot_demo.py`, `exp_baselines.py`: various experiment scripts.
 
-```get_embed.py```: interface to GPT-3 embedding.
+## Tools (`tools/`)
+- `utils.py`: utility functions, e.g., build_placeholder_map, substitute, name_to_prop, etc.
+- `compose.py`, `prompt_conversion.py`, `lang2ltl_examples.py`: additional utility scripts.
 
-```utils.py```: utility functions, e.g., build_placeholder_map, substitute, name_to_prop, etc.
+## Analysis (`analysis/`)
+- `analyze_results.py`: scripts to analyze results, e.g., confusion matrix, misclassification.
+- `results_analysis.py`, `plot_results.py`, `NL2TL_analysis.py`: result analysis and visualization.
 
-```eval.py```: functions to evaluate translation and planning.
-
-```exp_full.py```: main function to start running all experiments for evaluating the full language grounding system.
-
-```dataset_symbolic.py```: construct lifted train and test sets for evaluating the lifted translation module.
-
-```dataset_grounded.py```: construct grounded train and test sets using OSM or CleanUp landmarks for evaluation full translation system.
-
-```dataset_filtered.py```: import test sets from Gopalan et al. 18 and Berg et al. 20.
-
-```data_collection.py```: clean the collected lifted dataset of utterances, LTL formulas.
-
-```analyze_results.py```: scripts to analyze results, e.g., confusion matrix, misclassification.
-
-```tester.py```: unit tests.
+## Tests (`tests/`)
+- `tester.py`: unit tests.
 
 
 
@@ -171,7 +177,7 @@ where CITYNAME is the name of a file in the directory ```data/osm/osm_lmks``` wi
 
 To use Lang2LTL as an API
 ```
-from lang2ltl import lang2ltl
+from core.lang2ltl import lang2ltl
 out_ltl = lang2ltl(utt, lmk2sem, result_dpath)
 ```
 

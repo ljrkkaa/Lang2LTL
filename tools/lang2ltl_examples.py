@@ -1,9 +1,9 @@
 import os
 
-from lang2ltl import rer, translate_grounded_utts, SHARED_DPATH
-from formula_sampler import ALL_PROPS
-from s2s_hf_transformers import HF_MODELS
-from utils import load_from_file, props_in_utt
+from core.lang2ltl import rer, translate_grounded_utts, SHARED_DPATH
+from core.formula_sampler import ALL_PROPS
+from models.s2s_hf_transformers import HF_MODELS
+from tools.utils import load_from_file, props_in_utt
 
 
 def sym_trans_example(in_symbolic_utts, model_fpath, sym_trans_model, convert_rule, props):

@@ -7,8 +7,8 @@ from collections import defaultdict
 import numpy as np
 import spot
 
-from dataset_lifted import load_split_dataset
-from utils import load_from_file, save_to_file, name_to_prop, substitute_single_word
+from data_processing.dataset_lifted import load_split_dataset
+from tools.utils import load_from_file, save_to_file, name_to_prop, substitute_single_word
 
 
 def evaluate_lang2ltl(true_ltls, out_ltls, true_names, out_names, out_grnds, convert_rule, all_props):

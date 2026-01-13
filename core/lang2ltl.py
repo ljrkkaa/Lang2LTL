@@ -2,12 +2,12 @@ import os
 import logging
 from openai.embeddings_utils import cosine_similarity
 
-from gpt import GPT3, GPT4
-from get_embed import generate_embeds
-from s2s_sup_tcd import Seq2Seq
-from s2s_hf_transformers import HF_MODELS
-from formula_sampler import ALL_PROPS
-from utils import load_from_file, save_to_file, build_placeholder_map, substitute
+from models.gpt import GPT3, GPT4
+from models.get_embed import generate_embeds
+from models.s2s_sup_tcd import Seq2Seq
+from models.s2s_hf_transformers import HF_MODELS
+from core.formula_sampler import ALL_PROPS
+from tools.utils import load_from_file, save_to_file, build_placeholder_map, substitute
 
 SHARED_DPATH = os.path.join(os.path.expanduser('~'), "data", "shared", "lang2ltl")  # group's data folder on cluster
 

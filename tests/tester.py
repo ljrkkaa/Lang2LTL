@@ -1,8 +1,8 @@
 import unittest
 import string
 
-from utils import substitute_single_letter, substitute_single_word, shorten_prop, prefix_to_infix
-from gpt import prompt2msg
+from tools.utils import substitute_single_letter, substitute_single_word, shorten_prop, prefix_to_infix
+from models.gpt import prompt2msg
 
 
 class TestUtils(unittest.TestCase):

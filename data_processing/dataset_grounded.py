@@ -13,9 +13,9 @@ from pprint import pprint
 from itertools import permutations
 from collections import defaultdict
 
-from utils import load_from_file, save_to_file, substitute_single_letter, remove_prop_perms, name_to_prop
-from formula_sampler import PROPS
-from dataset_lifted import load_split_dataset
+from tools.utils import load_from_file, save_to_file, substitute_single_letter, remove_prop_perms, name_to_prop
+from core.formula_sampler import PROPS
+from data_processing.dataset_lifted import load_split_dataset
 
 
 def rename_map_files(osm_lmks_dpath):

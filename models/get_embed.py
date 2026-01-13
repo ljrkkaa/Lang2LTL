@@ -8,7 +8,7 @@ from pathlib import Path
 import openai
 
 from gpt import GPT3
-from utils import load_from_file, save_to_file
+from tools.utils import load_from_file, save_to_file
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
