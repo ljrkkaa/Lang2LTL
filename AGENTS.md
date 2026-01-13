@@ -15,7 +15,7 @@ conda create -n lang2ltl python=3.9 dill matplotlib plotly scipy scikit-learn pa
 conda activate lang2ltl
 
 # Install pip dependencies
-pip install openai tiktoken nltk seaborn pyyaml tensorboard transformers datasets evaluate torchtext
+pip install openai tiktoken nltk seaborn pyyaml tensorboard transformers datasets evaluate
 
 # Install PyTorch (GPU recommended)
 conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia

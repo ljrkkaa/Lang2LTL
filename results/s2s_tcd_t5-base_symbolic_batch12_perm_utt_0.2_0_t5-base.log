@@ -1,0 +1,2 @@
+Inference dataset: data/holdout_split_batch12_perm/symbolic_batch12_perm_utt_0.2_0.pkl
+Load model and checkpoint: model/t5-base/t5-base/checkpoint-9000

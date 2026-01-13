@@ -1,5 +1,4 @@
 compute_environment: LOCAL_MACHINE
-debug: false
 distributed_type: MULTI_GPU
 downcast_bf16: 'no'
 gpu_ids: 0,1
