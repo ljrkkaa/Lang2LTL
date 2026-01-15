@@ -1,0 +1,636 @@
+
+Building and simplification of the alternating automaton: 0.000054s
+6 states, 16 transitions
+
+Building the generalized Buchi automaton : 0.000559s
+33 states, 240 transitions
+
+Simplification of the generalized Buchi automaton - transitions: 0.000105s
+0 transitions removed
+
+Simplification of the generalized Buchi automaton - states: 0.000119s
+0 states removed
+
+Building the Buchi automaton : 0.000529s
+60 states, 444 transitions
+
+Simplification of the Buchi automaton - transitions: 0.000061s
+0 transitions removed
+
+Simplification of the Buchi automaton - states: 0.000252s
+7 states removed
+
+Simplification of the Buchi automaton - transitions: 0.000041s
+0 transitions removed
+
+Simplification of the Buchi automaton - states: 0.000195s
+0 states removed
+never { /* <> ( repairp3 && ! scanp3 && <> scanp3 ) && <> ( washp21 && <> mowp21 && <> scanp21 ) && <> ( sweepp21 && ! washp21 && <> mowp21 ) */
+T0_init:
+	if
+	:: (1) -> goto T1_S1
+	:: (!washp21 && sweepp21) -> goto T1_S2
+	:: (!washp21 && mowp21 && sweepp21) -> goto T1_S3
+	:: (washp21 && mowp21) -> goto T1_S4
+	:: (washp21 && mowp21 && scanp21) -> goto T1_S5
+	:: (washp21) -> goto T1_S6
+	:: (washp21 && scanp21) -> goto T1_S7
+	:: (repairp3 && !scanp3) -> goto T0_S8
+	:: (repairp3 && !scanp3 && !washp21 && sweepp21) -> goto T0_S9
+	:: (repairp3 && !scanp3 && !washp21 && mowp21 && sweepp21) -> goto T0_S10
+	:: (repairp3 && !scanp3 && washp21 && mowp21) -> goto T0_S11
+	:: (repairp3 && !scanp3 && washp21 && mowp21 && scanp21) -> goto T0_S12
+	:: (repairp3 && !scanp3 && washp21) -> goto T0_S13
+	:: (repairp3 && !scanp3 && washp21 && scanp21) -> goto T0_S14
+	fi;
+T1_S1:
+	if
+	:: (1) -> goto T1_S1
+	:: (!washp21 && sweepp21) -> goto T1_S2
+	:: (!washp21 && mowp21 && sweepp21) -> goto T1_S3
+	:: (washp21 && mowp21) -> goto T1_S4
+	:: (washp21 && mowp21 && scanp21) -> goto T1_S5
+	:: (washp21) -> goto T1_S6
+	:: (washp21 && scanp21) -> goto T1_S7
+	:: (repairp3 && !scanp3) -> goto T4_S8
+	:: (repairp3 && !scanp3 && !washp21 && sweepp21) -> goto T2_S9
+	:: (repairp3 && !scanp3 && !washp21 && mowp21 && sweepp21) -> goto T4_S10
+	:: (repairp3 && !scanp3 && washp21 && mowp21) -> goto T3_S11
+	:: (repairp3 && !scanp3 && washp21 && mowp21 && scanp21) -> goto T5_S12
+	:: (repairp3 && !scanp3 && washp21) -> goto T2_S13
+	:: (repairp3 && !scanp3 && washp21 && scanp21) -> goto T2_S14
+	fi;
+T4_S8:
+	if
+	:: (1) -> goto T4_S8
+	:: (!washp21 && sweepp21) -> goto T4_S9
+	:: (!washp21 && mowp21 && sweepp21) -> goto T4_S10
+	:: (washp21 && mowp21) -> goto T5_S11
+	:: (washp21 && mowp21 && scanp21) -> goto T5_S12
+	:: (washp21) -> goto T5_S13
+	:: (washp21 && scanp21) -> goto T5_S14
+	:: (scanp3) -> goto T4_S28
+	:: (scanp3 && !washp21 && sweepp21) -> goto T4_S27
+	:: (scanp3 && !washp21 && mowp21 && sweepp21) -> goto T4_S26
+	:: (scanp3 && washp21 && mowp21) -> goto T5_S24
+	:: (scanp3 && washp21 && mowp21 && scanp21) -> goto T5_S19
+	:: (scanp3 && washp21) -> goto T5_S22
+	:: (scanp3 && washp21 && scanp21) -> goto T5_S17
+	fi;
+T4_S9:
+	if
+	:: (1) -> goto T4_S9
+	:: (washp21) -> goto T0_S20
+	:: (washp21 && scanp21) -> goto T0_S15
+	:: (mowp21) -> goto T4_S10
+	:: (washp21 && mowp21) -> goto T0_S21
+	:: (washp21 && mowp21 && scanp21) -> goto T0_S16
+	:: (scanp3) -> goto T4_S27
+	:: (scanp3 && washp21) -> goto T2_S23
+	:: (scanp3 && washp21 && scanp21) -> goto T2_S18
+	:: (scanp3 && mowp21) -> goto T4_S26
+	:: (scanp3 && washp21 && mowp21) -> goto T3_S25
+	:: (scanp3 && washp21 && mowp21 && scanp21) -> goto accept_all
+	fi;
+T0_S20:
+	if
+	:: (1) -> goto T0_S20
+	:: (scanp21) -> goto T0_S15
+	:: (mowp21) -> goto T0_S21
+	:: (mowp21 && scanp21) -> goto T0_S16
+	:: (scanp3) -> goto T2_S23
+	:: (scanp3 && scanp21) -> goto T2_S18
+	:: (scanp3 && mowp21) -> goto T3_S25
+	:: (scanp3 && mowp21 && scanp21) -> goto accept_all
+	fi;
+T0_S15:
+	if
+	:: (1) -> goto T0_S15
+	:: (mowp21) -> goto T0_S16
+	:: (scanp3) -> goto T2_S18
+	:: (scanp3 && mowp21) -> goto accept_all
+	fi;
+T0_S21:
+	if
+	:: (1) -> goto T0_S21
+	:: (scanp21) -> goto T0_S16
+	:: (scanp3) -> goto T3_S25
+	:: (scanp3 && scanp21) -> goto accept_all
+	fi;
+T0_S16:
+	if
+	:: (1) -> goto T0_S16
+	:: (scanp3) -> goto accept_all
+	fi;
+T2_S23:
+	if
+	:: (1) -> goto T2_S23
+	:: (scanp21) -> goto T2_S18
+	:: (mowp21) -> goto T3_S25
+	:: (mowp21 && scanp21) -> goto accept_all
+	fi;
+T2_S18:
+	if
+	:: (1) -> goto T2_S18
+	:: (mowp21) -> goto accept_all
+	fi;
+T3_S25:
+	if
+	:: (1) -> goto T3_S25
+	:: (scanp21) -> goto accept_all
+	fi;
+T5_S11:
+	if
+	:: (1) -> goto T5_S11
+	:: (!washp21 && sweepp21) -> goto T0_S20
+	:: (!washp21 && mowp21 && sweepp21) -> goto T0_S21
+	:: (scanp21) -> goto T5_S12
+	:: (!washp21 && scanp21 && sweepp21) -> goto T0_S15
+	:: (!washp21 && mowp21 && scanp21 && sweepp21) -> goto T0_S16
+	:: (scanp3) -> goto T5_S24
+	:: (scanp3 && !washp21 && sweepp21) -> goto T2_S23
+	:: (scanp3 && !washp21 && mowp21 && sweepp21) -> goto T3_S25
+	:: (scanp3 && scanp21) -> goto T5_S19
+	:: (scanp3 && !washp21 && scanp21 && sweepp21) -> goto T2_S18
+	:: (scanp3 && !washp21 && mowp21 && scanp21 && sweepp21) -> goto accept_all
+	fi;
+T5_S13:
+	if
+	:: (1) -> goto T5_S13
+	:: (!washp21 && sweepp21) -> goto T0_S20
+	:: (scanp21) -> goto T5_S14
+	:: (!washp21 && scanp21 && sweepp21) -> goto T0_S15
+	:: (mowp21) -> goto T5_S11
+	:: (!washp21 && mowp21 && sweepp21) -> goto T0_S21
+	:: (mowp21 && scanp21) -> goto T5_S12
+	:: (!washp21 && mowp21 && scanp21 && sweepp21) -> goto T0_S16
+	:: (scanp3) -> goto T5_S22
+	:: (scanp3 && !washp21 && sweepp21) -> goto T2_S23
+	:: (scanp3 && scanp21) -> goto T5_S17
+	:: (scanp3 && !washp21 && scanp21 && sweepp21) -> goto T2_S18
+	:: (scanp3 && mowp21) -> goto T5_S24
+	:: (scanp3 && !washp21 && mowp21 && sweepp21) -> goto T3_S25
+	:: (scanp3 && mowp21 && scanp21) -> goto T5_S19
+	:: (scanp3 && !washp21 && mowp21 && scanp21 && sweepp21) -> goto accept_all
+	fi;
+T5_S14:
+	if
+	:: (1) -> goto T5_S14
+	:: (!washp21 && sweepp21) -> goto T0_S15
+	:: (mowp21) -> goto T5_S12
+	:: (!washp21 && mowp21 && sweepp21) -> goto T0_S16
+	:: (scanp3) -> goto T5_S17
+	:: (scanp3 && !washp21 && sweepp21) -> goto T2_S18
+	:: (scanp3 && mowp21) -> goto T5_S19
+	:: (scanp3 && !washp21 && mowp21 && sweepp21) -> goto accept_all
+	fi;
+T4_S28:
+	if
+	:: (1) -> goto T4_S28
+	:: (!washp21 && sweepp21) -> goto T4_S27
+	:: (!washp21 && mowp21 && sweepp21) -> goto T4_S26
+	:: (washp21 && mowp21) -> goto T5_S24
+	:: (washp21 && mowp21 && scanp21) -> goto T5_S19
+	:: (washp21) -> goto T5_S22
+	:: (washp21 && scanp21) -> goto T5_S17
+	fi;
+T4_S27:
+	if
+	:: (1) -> goto T4_S27
+	:: (washp21) -> goto T2_S23
+	:: (washp21 && scanp21) -> goto T2_S18
+	:: (mowp21) -> goto T4_S26
+	:: (washp21 && mowp21) -> goto T3_S25
+	:: (washp21 && mowp21 && scanp21) -> goto accept_all
+	fi;
+T4_S26:
+	if
+	:: (1) -> goto T4_S26
+	:: (washp21 && mowp21) -> goto T3_S25
+	:: (washp21 && mowp21 && scanp21) -> goto accept_all
+	:: (washp21) -> goto T2_S23
+	:: (washp21 && scanp21) -> goto T2_S18
+	fi;
+T5_S24:
+	if
+	:: (1) -> goto T5_S24
+	:: (!washp21 && sweepp21) -> goto T2_S23
+	:: (!washp21 && mowp21 && sweepp21) -> goto T3_S25
+	:: (scanp21) -> goto T5_S19
+	:: (!washp21 && scanp21 && sweepp21) -> goto T2_S18
+	:: (!washp21 && mowp21 && scanp21 && sweepp21) -> goto accept_all
+	fi;
+T5_S19:
+	if
+	:: (1) -> goto T5_S19
+	:: (!washp21 && sweepp21) -> goto T2_S18
+	:: (!washp21 && mowp21 && sweepp21) -> goto accept_all
+	fi;
+T5_S22:
+	if
+	:: (1) -> goto T5_S22
+	:: (!washp21 && sweepp21) -> goto T2_S23
+	:: (scanp21) -> goto T5_S17
+	:: (!washp21 && scanp21 && sweepp21) -> goto T2_S18
+	:: (mowp21) -> goto T5_S24
+	:: (!washp21 && mowp21 && sweepp21) -> goto T3_S25
+	:: (mowp21 && scanp21) -> goto T5_S19
+	:: (!washp21 && mowp21 && scanp21 && sweepp21) -> goto accept_all
+	fi;
+T5_S17:
+	if
+	:: (1) -> goto T5_S17
+	:: (!washp21 && sweepp21) -> goto T2_S18
+	:: (mowp21) -> goto T5_S19
+	:: (!washp21 && mowp21 && sweepp21) -> goto accept_all
+	fi;
+T2_S9:
+	if
+	:: (1) -> goto T2_S9
+	:: (washp21) -> goto T2_S20
+	:: (washp21 && scanp21) -> goto T2_S15
+	:: (mowp21) -> goto T4_S10
+	:: (washp21 && mowp21) -> goto T3_S21
+	:: (washp21 && mowp21 && scanp21) -> goto T0_S16
+	:: (scanp3) -> goto T2_S27
+	:: (scanp3 && washp21) -> goto T2_S23
+	:: (scanp3 && washp21 && scanp21) -> goto T2_S18
+	:: (scanp3 && mowp21) -> goto T4_S26
+	:: (scanp3 && washp21 && mowp21) -> goto T3_S25
+	:: (scanp3 && washp21 && mowp21 && scanp21) -> goto accept_all
+	fi;
+T2_S20:
+	if
+	:: (1) -> goto T2_S20
+	:: (scanp21) -> goto T2_S15
+	:: (mowp21) -> goto T3_S21
+	:: (mowp21 && scanp21) -> goto T0_S16
+	:: (scanp3) -> goto T2_S23
+	:: (scanp3 && scanp21) -> goto T2_S18
+	:: (scanp3 && mowp21) -> goto T3_S25
+	:: (scanp3 && mowp21 && scanp21) -> goto accept_all
+	fi;
+T2_S15:
+	if
+	:: (1) -> goto T2_S15
+	:: (mowp21) -> goto T0_S16
+	:: (scanp3) -> goto T2_S18
+	:: (scanp3 && mowp21) -> goto accept_all
+	fi;
+T3_S21:
+	if
+	:: (1) -> goto T3_S21
+	:: (scanp21) -> goto T0_S16
+	:: (scanp3) -> goto T3_S25
+	:: (scanp3 && scanp21) -> goto accept_all
+	fi;
+T2_S27:
+	if
+	:: (1) -> goto T2_S27
+	:: (washp21) -> goto T2_S23
+	:: (washp21 && scanp21) -> goto T2_S18
+	:: (mowp21) -> goto T4_S26
+	:: (washp21 && mowp21) -> goto T3_S25
+	:: (washp21 && mowp21 && scanp21) -> goto accept_all
+	fi;
+T4_S10:
+	if
+	:: (1) -> goto T4_S10
+	:: (washp21 && mowp21) -> goto T0_S21
+	:: (washp21 && mowp21 && scanp21) -> goto T0_S16
+	:: (washp21) -> goto T0_S20
+	:: (washp21 && scanp21) -> goto T0_S15
+	:: (scanp3) -> goto T4_S26
+	:: (scanp3 && washp21 && mowp21) -> goto T3_S25
+	:: (scanp3 && washp21 && mowp21 && scanp21) -> goto accept_all
+	:: (scanp3 && washp21) -> goto T2_S23
+	:: (scanp3 && washp21 && scanp21) -> goto T2_S18
+	fi;
+T3_S11:
+	if
+	:: (1) -> goto T3_S11
+	:: (!washp21 && sweepp21) -> goto T3_S20
+	:: (!washp21 && mowp21 && sweepp21) -> goto T3_S21
+	:: (scanp21) -> goto T5_S12
+	:: (!washp21 && scanp21 && sweepp21) -> goto T0_S15
+	:: (!washp21 && mowp21 && scanp21 && sweepp21) -> goto T0_S16
+	:: (scanp3) -> goto T3_S24
+	:: (scanp3 && !washp21 && sweepp21) -> goto T3_S23
+	:: (scanp3 && !washp21 && mowp21 && sweepp21) -> goto T3_S25
+	:: (scanp3 && scanp21) -> goto T5_S19
+	:: (scanp3 && !washp21 && scanp21 && sweepp21) -> goto T2_S18
+	:: (scanp3 && !washp21 && mowp21 && scanp21 && sweepp21) -> goto accept_all
+	fi;
+T3_S20:
+	if
+	:: (1) -> goto T3_S20
+	:: (scanp21) -> goto T0_S15
+	:: (mowp21) -> goto T3_S21
+	:: (mowp21 && scanp21) -> goto T0_S16
+	:: (scanp3) -> goto T3_S23
+	:: (scanp3 && scanp21) -> goto T2_S18
+	:: (scanp3 && mowp21) -> goto T3_S25
+	:: (scanp3 && mowp21 && scanp21) -> goto accept_all
+	fi;
+T3_S24:
+	if
+	:: (1) -> goto T3_S24
+	:: (!washp21 && sweepp21) -> goto T3_S23
+	:: (!washp21 && mowp21 && sweepp21) -> goto T3_S25
+	:: (scanp21) -> goto T5_S19
+	:: (!washp21 && scanp21 && sweepp21) -> goto T2_S18
+	:: (!washp21 && mowp21 && scanp21 && sweepp21) -> goto accept_all
+	fi;
+T3_S23:
+	if
+	:: (1) -> goto T3_S23
+	:: (scanp21) -> goto T2_S18
+	:: (mowp21) -> goto T3_S25
+	:: (mowp21 && scanp21) -> goto accept_all
+	fi;
+T5_S12:
+	if
+	:: (1) -> goto T5_S12
+	:: (!washp21 && sweepp21) -> goto T0_S15
+	:: (!washp21 && mowp21 && sweepp21) -> goto T0_S16
+	:: (scanp3) -> goto T5_S19
+	:: (scanp3 && !washp21 && sweepp21) -> goto T2_S18
+	:: (scanp3 && !washp21 && mowp21 && sweepp21) -> goto accept_all
+	fi;
+T2_S13:
+	if
+	:: (1) -> goto T2_S13
+	:: (!washp21 && sweepp21) -> goto T2_S20
+	:: (scanp21) -> goto T2_S14
+	:: (!washp21 && scanp21 && sweepp21) -> goto T2_S15
+	:: (mowp21) -> goto T3_S11
+	:: (!washp21 && mowp21 && sweepp21) -> goto T3_S21
+	:: (mowp21 && scanp21) -> goto T5_S12
+	:: (!washp21 && mowp21 && scanp21 && sweepp21) -> goto T0_S16
+	:: (scanp3) -> goto T2_S22
+	:: (scanp3 && !washp21 && sweepp21) -> goto T2_S23
+	:: (scanp3 && scanp21) -> goto T2_S17
+	:: (scanp3 && !washp21 && scanp21 && sweepp21) -> goto T2_S18
+	:: (scanp3 && mowp21) -> goto T3_S24
+	:: (scanp3 && !washp21 && mowp21 && sweepp21) -> goto T3_S25
+	:: (scanp3 && mowp21 && scanp21) -> goto T5_S19
+	:: (scanp3 && !washp21 && mowp21 && scanp21 && sweepp21) -> goto accept_all
+	fi;
+T2_S22:
+	if
+	:: (1) -> goto T2_S22
+	:: (!washp21 && sweepp21) -> goto T2_S23
+	:: (scanp21) -> goto T2_S17
+	:: (!washp21 && scanp21 && sweepp21) -> goto T2_S18
+	:: (mowp21) -> goto T3_S24
+	:: (!washp21 && mowp21 && sweepp21) -> goto T3_S25
+	:: (mowp21 && scanp21) -> goto T5_S19
+	:: (!washp21 && mowp21 && scanp21 && sweepp21) -> goto accept_all
+	fi;
+T2_S17:
+	if
+	:: (1) -> goto T2_S17
+	:: (!washp21 && sweepp21) -> goto T2_S18
+	:: (mowp21) -> goto T5_S19
+	:: (!washp21 && mowp21 && sweepp21) -> goto accept_all
+	fi;
+T2_S14:
+	if
+	:: (1) -> goto T2_S14
+	:: (!washp21 && sweepp21) -> goto T2_S15
+	:: (mowp21) -> goto T5_S12
+	:: (!washp21 && mowp21 && sweepp21) -> goto T0_S16
+	:: (scanp3) -> goto T2_S17
+	:: (scanp3 && !washp21 && sweepp21) -> goto T2_S18
+	:: (scanp3 && mowp21) -> goto T5_S19
+	:: (scanp3 && !washp21 && mowp21 && sweepp21) -> goto accept_all
+	fi;
+T1_S2:
+	if
+	:: (1) -> goto T1_S2
+	:: (washp21) -> goto T1_S31
+	:: (washp21 && scanp21) -> goto T1_S29
+	:: (mowp21) -> goto T1_S3
+	:: (washp21 && mowp21) -> goto T1_S32
+	:: (washp21 && mowp21 && scanp21) -> goto T1_S30
+	:: (repairp3 && !scanp3) -> goto T2_S9
+	:: (repairp3 && !scanp3 && washp21) -> goto T2_S20
+	:: (repairp3 && !scanp3 && washp21 && scanp21) -> goto T2_S15
+	:: (repairp3 && !scanp3 && mowp21) -> goto T4_S10
+	:: (repairp3 && !scanp3 && washp21 && mowp21) -> goto T3_S21
+	:: (repairp3 && !scanp3 && washp21 && mowp21 && scanp21) -> goto T0_S16
+	fi;
+T1_S31:
+	if
+	:: (1) -> goto T1_S31
+	:: (scanp21) -> goto T1_S29
+	:: (mowp21) -> goto T1_S32
+	:: (mowp21 && scanp21) -> goto T1_S30
+	:: (repairp3 && !scanp3) -> goto T2_S20
+	:: (repairp3 && !scanp3 && scanp21) -> goto T2_S15
+	:: (repairp3 && !scanp3 && mowp21) -> goto T3_S21
+	:: (repairp3 && !scanp3 && mowp21 && scanp21) -> goto T0_S16
+	fi;
+T1_S29:
+	if
+	:: (1) -> goto T1_S29
+	:: (mowp21) -> goto T1_S30
+	:: (repairp3 && !scanp3) -> goto T2_S15
+	:: (repairp3 && !scanp3 && mowp21) -> goto T0_S16
+	fi;
+T1_S32:
+	if
+	:: (1) -> goto T1_S32
+	:: (scanp21) -> goto T1_S30
+	:: (repairp3 && !scanp3) -> goto T3_S21
+	:: (repairp3 && !scanp3 && scanp21) -> goto T0_S16
+	fi;
+T1_S30:
+	if
+	:: (1) -> goto T1_S30
+	:: (repairp3 && !scanp3) -> goto T0_S16
+	fi;
+T1_S3:
+	if
+	:: (1) -> goto T1_S3
+	:: (washp21 && mowp21) -> goto T1_S32
+	:: (washp21 && mowp21 && scanp21) -> goto T1_S30
+	:: (washp21) -> goto T1_S31
+	:: (washp21 && scanp21) -> goto T1_S29
+	:: (repairp3 && !scanp3) -> goto T4_S10
+	:: (repairp3 && !scanp3 && washp21 && mowp21) -> goto T3_S21
+	:: (repairp3 && !scanp3 && washp21 && mowp21 && scanp21) -> goto T0_S16
+	:: (repairp3 && !scanp3 && washp21) -> goto T2_S20
+	:: (repairp3 && !scanp3 && washp21 && scanp21) -> goto T2_S15
+	fi;
+T1_S4:
+	if
+	:: (1) -> goto T1_S4
+	:: (!washp21 && sweepp21) -> goto T1_S31
+	:: (!washp21 && mowp21 && sweepp21) -> goto T1_S32
+	:: (scanp21) -> goto T1_S5
+	:: (!washp21 && scanp21 && sweepp21) -> goto T1_S29
+	:: (!washp21 && mowp21 && scanp21 && sweepp21) -> goto T1_S30
+	:: (repairp3 && !scanp3) -> goto T3_S11
+	:: (repairp3 && !scanp3 && !washp21 && sweepp21) -> goto T2_S20
+	:: (repairp3 && !scanp3 && !washp21 && mowp21 && sweepp21) -> goto T3_S21
+	:: (repairp3 && !scanp3 && scanp21) -> goto T5_S12
+	:: (repairp3 && !scanp3 && !washp21 && scanp21 && sweepp21) -> goto T2_S15
+	:: (repairp3 && !scanp3 && !washp21 && mowp21 && scanp21 && sweepp21) -> goto T0_S16
+	fi;
+T1_S5:
+	if
+	:: (1) -> goto T1_S5
+	:: (!washp21 && sweepp21) -> goto T1_S29
+	:: (!washp21 && mowp21 && sweepp21) -> goto T1_S30
+	:: (repairp3 && !scanp3) -> goto T5_S12
+	:: (repairp3 && !scanp3 && !washp21 && sweepp21) -> goto T2_S15
+	:: (repairp3 && !scanp3 && !washp21 && mowp21 && sweepp21) -> goto T0_S16
+	fi;
+T1_S6:
+	if
+	:: (1) -> goto T1_S6
+	:: (!washp21 && sweepp21) -> goto T1_S31
+	:: (scanp21) -> goto T1_S7
+	:: (!washp21 && scanp21 && sweepp21) -> goto T1_S29
+	:: (mowp21) -> goto T1_S4
+	:: (!washp21 && mowp21 && sweepp21) -> goto T1_S32
+	:: (mowp21 && scanp21) -> goto T1_S5
+	:: (!washp21 && mowp21 && scanp21 && sweepp21) -> goto T1_S30
+	:: (repairp3 && !scanp3) -> goto T2_S13
+	:: (repairp3 && !scanp3 && !washp21 && sweepp21) -> goto T2_S20
+	:: (repairp3 && !scanp3 && scanp21) -> goto T2_S14
+	:: (repairp3 && !scanp3 && !washp21 && scanp21 && sweepp21) -> goto T2_S15
+	:: (repairp3 && !scanp3 && mowp21) -> goto T3_S11
+	:: (repairp3 && !scanp3 && !washp21 && mowp21 && sweepp21) -> goto T3_S21
+	:: (repairp3 && !scanp3 && mowp21 && scanp21) -> goto T5_S12
+	:: (repairp3 && !scanp3 && !washp21 && mowp21 && scanp21 && sweepp21) -> goto T0_S16
+	fi;
+T1_S7:
+	if
+	:: (1) -> goto T1_S7
+	:: (!washp21 && sweepp21) -> goto T1_S29
+	:: (mowp21) -> goto T1_S5
+	:: (!washp21 && mowp21 && sweepp21) -> goto T1_S30
+	:: (repairp3 && !scanp3) -> goto T2_S14
+	:: (repairp3 && !scanp3 && !washp21 && sweepp21) -> goto T2_S15
+	:: (repairp3 && !scanp3 && mowp21) -> goto T5_S12
+	:: (repairp3 && !scanp3 && !washp21 && mowp21 && sweepp21) -> goto T0_S16
+	fi;
+T0_S8:
+	if
+	:: (1) -> goto T0_S8
+	:: (!washp21 && sweepp21) -> goto T0_S9
+	:: (!washp21 && mowp21 && sweepp21) -> goto T0_S10
+	:: (washp21 && mowp21) -> goto T0_S11
+	:: (washp21 && mowp21 && scanp21) -> goto T0_S12
+	:: (washp21) -> goto T0_S13
+	:: (washp21 && scanp21) -> goto T0_S14
+	:: (scanp3) -> goto T4_S28
+	:: (scanp3 && !washp21 && sweepp21) -> goto T2_S27
+	:: (scanp3 && !washp21 && mowp21 && sweepp21) -> goto T4_S26
+	:: (scanp3 && washp21 && mowp21) -> goto T3_S24
+	:: (scanp3 && washp21 && mowp21 && scanp21) -> goto T5_S19
+	:: (scanp3 && washp21) -> goto T2_S22
+	:: (scanp3 && washp21 && scanp21) -> goto T2_S17
+	fi;
+T0_S9:
+	if
+	:: (1) -> goto T0_S9
+	:: (washp21) -> goto T0_S20
+	:: (washp21 && scanp21) -> goto T0_S15
+	:: (mowp21) -> goto T0_S10
+	:: (washp21 && mowp21) -> goto T0_S21
+	:: (washp21 && mowp21 && scanp21) -> goto T0_S16
+	:: (scanp3) -> goto T2_S27
+	:: (scanp3 && washp21) -> goto T2_S23
+	:: (scanp3 && washp21 && scanp21) -> goto T2_S18
+	:: (scanp3 && mowp21) -> goto T4_S26
+	:: (scanp3 && washp21 && mowp21) -> goto T3_S25
+	:: (scanp3 && washp21 && mowp21 && scanp21) -> goto accept_all
+	fi;
+T0_S10:
+	if
+	:: (1) -> goto T0_S10
+	:: (washp21 && mowp21) -> goto T0_S21
+	:: (washp21 && mowp21 && scanp21) -> goto T0_S16
+	:: (washp21) -> goto T0_S20
+	:: (washp21 && scanp21) -> goto T0_S15
+	:: (scanp3) -> goto T4_S26
+	:: (scanp3 && washp21 && mowp21) -> goto T3_S25
+	:: (scanp3 && washp21 && mowp21 && scanp21) -> goto accept_all
+	:: (scanp3 && washp21) -> goto T2_S23
+	:: (scanp3 && washp21 && scanp21) -> goto T2_S18
+	fi;
+T0_S11:
+	if
+	:: (1) -> goto T0_S11
+	:: (!washp21 && sweepp21) -> goto T0_S20
+	:: (!washp21 && mowp21 && sweepp21) -> goto T0_S21
+	:: (scanp21) -> goto T0_S12
+	:: (!washp21 && scanp21 && sweepp21) -> goto T0_S15
+	:: (!washp21 && mowp21 && scanp21 && sweepp21) -> goto T0_S16
+	:: (scanp3) -> goto T3_S24
+	:: (scanp3 && !washp21 && sweepp21) -> goto T2_S23
+	:: (scanp3 && !washp21 && mowp21 && sweepp21) -> goto T3_S25
+	:: (scanp3 && scanp21) -> goto T5_S19
+	:: (scanp3 && !washp21 && scanp21 && sweepp21) -> goto T2_S18
+	:: (scanp3 && !washp21 && mowp21 && scanp21 && sweepp21) -> goto accept_all
+	fi;
+T0_S12:
+	if
+	:: (1) -> goto T0_S12
+	:: (!washp21 && sweepp21) -> goto T0_S15
+	:: (!washp21 && mowp21 && sweepp21) -> goto T0_S16
+	:: (scanp3) -> goto T5_S19
+	:: (scanp3 && !washp21 && sweepp21) -> goto T2_S18
+	:: (scanp3 && !washp21 && mowp21 && sweepp21) -> goto accept_all
+	fi;
+T0_S13:
+	if
+	:: (1) -> goto T0_S13
+	:: (!washp21 && sweepp21) -> goto T0_S20
+	:: (scanp21) -> goto T0_S14
+	:: (!washp21 && scanp21 && sweepp21) -> goto T0_S15
+	:: (mowp21) -> goto T0_S11
+	:: (!washp21 && mowp21 && sweepp21) -> goto T0_S21
+	:: (mowp21 && scanp21) -> goto T0_S12
+	:: (!washp21 && mowp21 && scanp21 && sweepp21) -> goto T0_S16
+	:: (scanp3) -> goto T2_S22
+	:: (scanp3 && !washp21 && sweepp21) -> goto T2_S23
+	:: (scanp3 && scanp21) -> goto T2_S17
+	:: (scanp3 && !washp21 && scanp21 && sweepp21) -> goto T2_S18
+	:: (scanp3 && mowp21) -> goto T3_S24
+	:: (scanp3 && !washp21 && mowp21 && sweepp21) -> goto T3_S25
+	:: (scanp3 && mowp21 && scanp21) -> goto T5_S19
+	:: (scanp3 && !washp21 && mowp21 && scanp21 && sweepp21) -> goto accept_all
+	fi;
+T0_S14:
+	if
+	:: (1) -> goto T0_S14
+	:: (!washp21 && sweepp21) -> goto T0_S15
+	:: (mowp21) -> goto T0_S12
+	:: (!washp21 && mowp21 && sweepp21) -> goto T0_S16
+	:: (scanp3) -> goto T2_S17
+	:: (scanp3 && !washp21 && sweepp21) -> goto T2_S18
+	:: (scanp3 && mowp21) -> goto T5_S19
+	:: (scanp3 && !washp21 && mowp21 && sweepp21) -> goto accept_all
+	fi;
+accept_all:
+	skip
+}
+
+total memory used:    139944
+ size	  pool	allocs	 frees
+    2	  2047	  2092	   142
+    3	    31	    46	    24
+    4	   255	   183	     2
+    5	  1023	   551	     0
+    6	  1023	  1095	   414
+    7	   127	    64	     7
+   10	     1	     1	     0
+   33	     3	     2	     2
+   35	     1	     2	     2
+atrans	    39	   185	   168
+gtrans	   273	   313	    40
+btrans	   519	   519	    33
